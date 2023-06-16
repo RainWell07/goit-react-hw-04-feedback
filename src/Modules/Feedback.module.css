@@ -1,0 +1,72 @@
+@import 'normalize.css';
+
+.container {
+    padding: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.basicFont {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    line-height: 1.5;
+    font-weight: 500;
+    margin-top: 0;
+  margin-bottom: 0;
+}
+
+.heroMargin {
+    margin-bottom: 30px;
+}
+
+.button {
+ padding: 20px;
+ border: none;
+ border-radius: 8px;
+ margin-left: 20px;
+ font-size: 20px;
+ cursor: pointer;
+ transition: all 0.3s ease;
+}
+.button:hover {
+ transition: 250ms background-color;
+ background-color: rgb(90, 90, 237);
+ color: azure;
+ transform: scale(1.08);
+}
+.buttonMargin {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.neutral{
+    color: blue;
+    font-size: 20px;
+}
+
+.good {
+    color: green;
+    font-size: 20px;
+}
+.bad {
+    color: red;
+    font-size: 20px;
+ }
+.total {
+    color: orange;
+    font-size: 20px;
+}
+.positive {
+    color: brown;
+    font-size: 25px;
+}
