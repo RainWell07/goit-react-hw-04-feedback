@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, {useState } from "react";
 import FeedbackOptions from "../components/FeedbackOptions";
 import Statistics from "../components/Statistics";
 import Section from "../components/Section";
@@ -11,8 +11,9 @@ const App = () => {
  const [good, setGood] = useState(0);
  const [neutral, setNeutral] = useState(0);
  const [bad, setBad] = useState(0);
- const [totalFeedback, setTotalFeedback] = useState(0);
- const [positivePercentage, setPositivePercentage] = useState(0);
+
+ const optionsFeedback = ['good', 'neutral', 'bad'];
+ const valueFeedback = [good, neutral, bad];
 
 
  const handleFeedback = (type) => {
@@ -25,34 +26,36 @@ const App = () => {
    }
   };
 
-  useEffect(() => {
-   const total = good + neutral + bad;
-   const percentage = total > 0 ? Math.round((good / total) * 100) : 0;
-   setTotalFeedback(total);
-   setPositivePercentage(percentage);
-  }, [good, neutral, bad]);
+  function countTotalFeedback() {
+    return valueFeedback.reduce( (previousValues, number) => {
+    return previousValues + number;
+    }, 0);
+  }
+
+  function countPositivePercentage() {
+    return Math.round( (good * 100) / countTotalFeedback());
+  }
 
     return (
     <div className={css.container}>
     <Section title="Please leave feedback">
     <FeedbackOptions
-    options ={["good", "neutral", "bad"]}
-    onLeaveFeedback={handleFeedback}
-    />
+    options ={optionsFeedback}
+    onLeaveFeedback={handleFeedback}/>
     </Section>
 
     <Section title = "Statistics:">
-      {totalFeedback > 0 ? (
-      <Statistics
-      good = {good}
-      neutral = {neutral}
-      bad = {bad}
-      total = {totalFeedback}
-      positivePercentage = {positivePercentage}
-      />
-      ) : (
-      <Notification message = "There is no feedback..." />
-      )}
+    {countTotalFeedback() > 0 && (
+    <Statistics
+    good={good}
+    neutral={neutral}
+    bad={bad}
+    total={countTotalFeedback()}
+    positivePercentage={countPositivePercentage()}/>
+    )}
+    {countTotalFeedback() === 0 && (
+      <Notification message="There is no feedback yet..."/>
+    )}
     </Section>
     </div>
     );
